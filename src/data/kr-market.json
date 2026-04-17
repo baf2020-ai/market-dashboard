@@ -1,0 +1,155 @@
+{
+  "fetchedAt": "2026-04-17T00:35:00Z",
+  "indices": [
+    {
+      "symbol": "KOSPI",
+      "name": "코스피",
+      "price": 2650.45,
+      "change": 12.30,
+      "changePercent": 0.47,
+      "previousClose": 2638.15,
+      "dayHigh": 2658.00,
+      "dayLow": 2640.00,
+      "volume": 450000000,
+      "tradingValue": 8500000000000
+    },
+    {
+      "symbol": "KOSDAQ",
+      "name": "코스닥",
+      "price": 870.25,
+      "change": -3.10,
+      "changePercent": -0.35,
+      "previousClose": 873.35,
+      "dayHigh": 875.00,
+      "dayLow": 868.00,
+      "volume": 680000000,
+      "tradingValue": 6200000000000
+    }
+  ],
+  "topVolume": [
+    {
+      "symbol": "005930",
+      "name": "삼성전자",
+      "price": 72500,
+      "change": 500,
+      "changePercent": 0.69,
+      "volume": 18000000
+    },
+    {
+      "symbol": "000660",
+      "name": "SK하이닉스",
+      "price": 185000,
+      "change": 8500,
+      "changePercent": 4.81,
+      "volume": 15200000
+    },
+    {
+      "symbol": "373220",
+      "name": "LG에너지솔루션",
+      "price": 385000,
+      "change": -5000,
+      "changePercent": -1.28,
+      "volume": 12500000
+    },
+    {
+      "symbol": "005380",
+      "name": "현대차",
+      "price": 245000,
+      "change": 3000,
+      "changePercent": 1.24,
+      "volume": 8900000
+    },
+    {
+      "symbol": "035720",
+      "name": "카카오",
+      "price": 52300,
+      "change": -800,
+      "changePercent": -1.51,
+      "volume": 7600000
+    }
+  ],
+  "topGainers": [
+    {
+      "symbol": "000660",
+      "name": "SK하이닉스",
+      "price": 185000,
+      "change": 8500,
+      "changePercent": 4.81,
+      "volume": 5200000
+    },
+    {
+      "symbol": "006400",
+      "name": "삼성SDI",
+      "price": 425000,
+      "change": 15000,
+      "changePercent": 3.66,
+      "volume": 3800000
+    },
+    {
+      "symbol": "051910",
+      "name": "LG화학",
+      "price": 380000,
+      "change": 12000,
+      "changePercent": 3.26,
+      "volume": 2900000
+    },
+    {
+      "symbol": "005380",
+      "name": "현대차",
+      "price": 245000,
+      "change": 3000,
+      "changePercent": 1.24,
+      "volume": 8900000
+    },
+    {
+      "symbol": "005930",
+      "name": "삼성전자",
+      "price": 72500,
+      "change": 500,
+      "changePercent": 0.69,
+      "volume": 18000000
+    }
+  ],
+  "topLosers": [
+    {
+      "symbol": "035420",
+      "name": "NAVER",
+      "price": 210000,
+      "change": -7000,
+      "changePercent": -3.23,
+      "volume": 3100000
+    },
+    {
+      "symbol": "035720",
+      "name": "카카오",
+      "price": 52300,
+      "change": -800,
+      "changePercent": -1.51,
+      "volume": 7600000
+    },
+    {
+      "symbol": "373220",
+      "name": "LG에너지솔루션",
+      "price": 385000,
+      "change": -5000,
+      "changePercent": -1.28,
+      "volume": 12500000
+    },
+    {
+      "symbol": "068270",
+      "name": "셀트리온",
+      "price": 178500,
+      "change": -2000,
+      "changePercent": -1.11,
+      "volume": 4200000
+    },
+    {
+      "symbol": "055550",
+      "name": "신한지주",
+      "price": 45600,
+      "change": -350,
+      "changePercent": -0.76,
+      "volume": 5100000
+    }
+  ]
+}

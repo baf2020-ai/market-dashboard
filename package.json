@@ -1,0 +1,20 @@
+{
+  "name": "stock-dashboard",
+  "type": "module",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "fetch:us-market": "node scripts/fetch-us-market.mjs",
+    "fetch:us-news": "node scripts/fetch-us-news.mjs",
+    "fetch:kr-market": "node scripts/fetch-kr-market.mjs",
+    "fetch:all": "npm run fetch:us-market && npm run fetch:us-news && npm run fetch:kr-market"
+  },
+  "dependencies": {
+    "astro": "^5.0.0",
+    "tailwindcss": "^4.0.0",
+    "@tailwindcss/vite": "^4.0.0"
+  }
+}

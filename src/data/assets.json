@@ -1,0 +1,29 @@
+{
+  "fetchedAt": "2026-04-18T21:00:00Z",
+  "assets": [
+    {
+      "symbol": "GC=F",
+      "name": "Gold",
+      "displayName": "금 (XAU)",
+      "price": 2380.50,
+      "change": 12.30,
+      "changePercent": 0.52,
+      "dayHigh": 2395.00,
+      "dayLow": 2365.00,
+      "currency": "USD",
+      "unit": "oz"
+    },
+    {
+      "symbol": "BTC-USD",
+      "name": "Bitcoin",
+      "displayName": "비트코인 (BTC)",
+      "price": 84250.00,
+      "change": -1200.50,
+      "changePercent": -1.40,
+      "dayHigh": 86000.00,
+      "dayLow": 83500.00,
+      "currency": "USD",
+      "unit": "BTC"
+    }
+  ]
+}

@@ -1,0 +1,92 @@
+---
+interface Stock {
+  symbol: string;
+  name: string;
+  price: number;
+  change: number;
+  changePercent: number;
+  volume: number;
+}
+
+interface Props {
+  title: string;
+  stocks: Stock[];
+  type: "gainers" | "losers" | "volume";
+  currency?: "USD" | "KRW";
+}
+
+const { title, stocks, type, currency = "USD" } = Astro.props;
+
+function stockHref(symbol: string, cur: string): string {
+  if (cur === "KRW") return `https://finance.naver.com/item/main.naver?code=${symbol}`;
+  return `https://finance.yahoo.com/quote/${encodeURIComponent(symbol)}`;
+}
+
+function formatPrice(n: number, cur: string): string {
+  if (cur === "KRW") return n.toLocaleString("ko-KR");
+  return n.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
+
+function formatVolume(n: number): string {
+  if (n >= 1_000_000_000) return (n / 1_000_000_000).toFixed(1) + "B";
+  if (n >= 1_000_000) return (n / 1_000_000).toFixed(1) + "M";
+  if (n >= 1_000) return (n / 1_000).toFixed(1) + "K";
+  return n.toString();
+}
+
+const badgeColor = type === "gainers" ? "bg-up/15 text-up" : type === "losers" ? "bg-down/15 text-down" : "bg-flat/15 text-flat";
+---
+
+<div class="rounded-lg border border-border bg-surface overflow-hidden">
+  <div class="flex items-center gap-2 px-4 py-3 sm:px-5 border-b border-border">
+    <span class:list={["inline-block w-2 h-2 rounded-full", type === "gainers" ? "bg-up" : type === "losers" ? "bg-down" : "bg-flat"]}></span>
+    <h3 class="text-sm font-semibold">{title}</h3>
+  </div>
+  {stocks.length === 0 ? (
+    <div class="px-4 py-8 text-center text-text-secondary text-sm">데이터 준비 중</div>
+  ) : (
+    <div class="overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="text-text-secondary text-xs border-b border-border">
+            <th class="px-4 py-2 text-left font-medium sm:px-5">종목</th>
+            <th class="px-4 py-2 text-right font-medium">현재가</th>
+            <th class="px-4 py-2 text-right font-medium">등락률</th>
+            <th class="px-4 py-2 text-right font-medium hidden sm:table-cell">거래량</th>
+          </tr>
+        </thead>
+        <tbody>
+          {stocks.map((stock) => {
+            const isUp = stock.change > 0;
+            const isDown = stock.change < 0;
+            const sign = isUp ? "+" : "";
+            return (
+              <tr class="border-b border-border/50 last:border-b-0 hover:bg-surface-alt/50 transition-colors">
+                <td class="px-4 py-2.5 sm:px-5">
+                  <a href={stockHref(stock.symbol, currency)} target="_blank" rel="noopener noreferrer" class="hover:text-blue-400 transition-colors">
+                    <div class="font-medium">{stock.symbol}</div>
+                    <div class="text-text-secondary text-xs truncate max-w-[120px] sm:max-w-none">{stock.name}</div>
+                  </a>
+                </td>
+                <td class="px-4 py-2.5 text-right tabular-nums font-medium">
+                  {currency === "KRW" ? "\u20A9" : "$"}{formatPrice(stock.price, currency)}
+                </td>
+                <td class="px-4 py-2.5 text-right">
+                  <span class:list={[
+                    "inline-block rounded px-1.5 py-0.5 text-xs font-semibold tabular-nums",
+                    badgeColor
+                  ]}>
+                    {sign}{stock.changePercent.toFixed(2)}%
+                  </span>
+                </td>
+                <td class="px-4 py-2.5 text-right tabular-nums text-text-secondary hidden sm:table-cell">
+                  {formatVolume(stock.volume)}
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
+  )}
+</div>

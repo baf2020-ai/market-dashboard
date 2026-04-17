@@ -1,0 +1,18 @@
+{
+  "name": "dashboard-scripts",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Stock market data collection scripts for the dashboard",
+  "scripts": {
+    "fetch:us-market": "node fetch-us-market.mjs",
+    "fetch:us-news": "node fetch-us-news.mjs",
+    "fetch:kr-market": "node fetch-kr-market.mjs",
+    "fetch:assets": "node fetch-assets.mjs",
+    "fetch:all": "npm run fetch:us-market && npm run fetch:us-news && npm run fetch:kr-market && npm run fetch:assets"
+  },
+  "dependencies": {
+    "google-translate-api-x": "^10.7.2",
+    "yahoo-finance2": "^2.14.0"
+  }
+}

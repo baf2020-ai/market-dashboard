@@ -1,0 +1,73 @@
+---
+interface Article {
+  title: string;
+  titleKo: string;
+  source: string;
+  url: string;
+  publishedAt: string;
+  summary: string;
+  summaryKo: string;
+  sentiment?: string;
+}
+
+interface Props {
+  articles: Article[];
+}
+
+const { articles } = Astro.props;
+
+function timeAgo(iso: string): string {
+  const diff = Date.now() - new Date(iso).getTime();
+  const hours = Math.floor(diff / 3_600_000);
+  if (hours < 1) return "방금 전";
+  if (hours < 24) return `${hours}시간 전`;
+  const days = Math.floor(hours / 24);
+  return `${days}일 전`;
+}
+
+const sentimentLabel: Record<string, { text: string; class: string }> = {
+  positive: { text: "긍정", class: "text-up" },
+  negative: { text: "부정", class: "text-down" },
+  neutral: { text: "중립", class: "text-flat" },
+};
+---
+
+<div class="rounded-lg border border-border bg-surface overflow-hidden">
+  <div class="flex items-center gap-2 px-4 py-3 sm:px-5 border-b border-border">
+    <span class="inline-block w-2 h-2 rounded-full bg-blue-400"></span>
+    <h3 class="text-sm font-semibold">US Market News</h3>
+  </div>
+  {articles.length === 0 ? (
+    <div class="px-4 py-8 text-center text-text-secondary text-sm">데이터 준비 중</div>
+  ) : (
+    <ul class="divide-y divide-border/50">
+      {articles.map((article) => {
+        const sentiment = sentimentLabel[article.sentiment ?? "neutral"] ?? sentimentLabel.neutral;
+        return (
+          <li class="px-4 py-3 sm:px-5 hover:bg-surface-alt/50 transition-colors">
+            <h4 class="text-sm font-medium leading-snug">
+              {article.titleKo || article.title}
+            </h4>
+            <p class="mt-1 text-xs text-text-secondary line-clamp-2 leading-relaxed">
+              {article.summaryKo || article.summary}
+            </p>
+            <div class="mt-1.5 flex items-center gap-2 text-xs text-text-secondary">
+              <a
+                href={article.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="font-medium text-blue-400 hover:text-blue-300 transition-colors"
+              >
+                {article.source}
+              </a>
+              <span>&middot;</span>
+              <span>{timeAgo(article.publishedAt)}</span>
+              <span>&middot;</span>
+              <span class={sentiment.class}>{sentiment.text}</span>
+            </div>
+          </li>
+        );
+      })}
+    </ul>
+  )}
+</div>

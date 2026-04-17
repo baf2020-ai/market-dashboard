@@ -1,0 +1,62 @@
+---
+interface Props {
+  symbol: string;
+  name: string;
+  price: number;
+  change: number;
+  changePercent: number;
+  previousClose: number;
+  dayHigh: number;
+  dayLow: number;
+  volume?: number;
+  tradingValue?: number;
+  href?: string;
+}
+
+const { name, price, change, changePercent, dayHigh, dayLow, volume, tradingValue, href } = Astro.props;
+
+const isUp = change > 0;
+const isDown = change < 0;
+const arrow = isUp ? "\u25B2" : isDown ? "\u25BC" : "";
+const sign = isUp ? "+" : "";
+
+function formatNumber(n: number): string {
+  return n.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
+
+function formatVolume(n: number): string {
+  if (n >= 1_000_000_000) return (n / 1_000_000_000).toFixed(1) + "B";
+  if (n >= 1_000_000) return (n / 1_000_000).toFixed(1) + "M";
+  if (n >= 1_000) return (n / 1_000).toFixed(1) + "K";
+  return n.toString();
+}
+
+function formatKrw(n: number): string {
+  if (n >= 1_000_000_000_000) return (n / 1_000_000_000_000).toFixed(1) + "조";
+  if (n >= 100_000_000) return (n / 100_000_000).toFixed(0) + "억";
+  return n.toLocaleString();
+}
+---
+
+<a href={href} target="_blank" rel="noopener noreferrer" class:list={["block rounded-lg border border-border bg-surface p-4 sm:p-5 transition-colors", href && "hover:border-text-secondary cursor-pointer"]}>
+  <div class="mb-2 text-text-secondary text-sm font-medium">{name}</div>
+  <div class="flex items-baseline gap-3">
+    <span class="text-2xl font-bold tabular-nums">{formatNumber(price)}</span>
+    <span class:list={[
+      "text-sm font-semibold tabular-nums",
+      { "text-up": isUp, "text-down": isDown, "text-flat": !isUp && !isDown }
+    ]}>
+      {arrow} {sign}{formatNumber(change)} ({sign}{changePercent.toFixed(2)}%)
+    </span>
+  </div>
+  <div class="mt-3 flex gap-4 text-xs text-text-secondary">
+    <span>H <span class="text-text-primary tabular-nums">{formatNumber(dayHigh)}</span></span>
+    <span>L <span class="text-text-primary tabular-nums">{formatNumber(dayLow)}</span></span>
+    {volume !== undefined && (
+      <span>Vol <span class="text-text-primary tabular-nums">{formatVolume(volume)}</span></span>
+    )}
+    {tradingValue !== undefined && (
+      <span>거래대금 <span class="text-text-primary tabular-nums">{formatKrw(tradingValue)}</span></span>
+    )}
+  </div>
+</a>

@@ -1,0 +1,114 @@
+---
+import "../styles/global.css";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import MarketIndex from "../components/MarketIndex.astro";
+import StockTable from "../components/StockTable.astro";
+import NewsCard from "../components/NewsCard.astro";
+import UpdatedAt from "../components/UpdatedAt.astro";
+
+import assets from "../data/assets.json";
+import usMarket from "../data/us-market.json";
+import usNews from "../data/us-news.json";
+import krMarket from "../data/kr-market.json";
+
+const KR_INDEX_HREF: Record<string, string> = {
+  KOSPI: "https://finance.naver.com/sise/sise_index.naver?code=KOSPI",
+  KOSDAQ: "https://finance.naver.com/sise/sise_index.naver?code=KOSDAQ",
+};
+
+function yahooHref(symbol: string) {
+  return `https://finance.yahoo.com/quote/${encodeURIComponent(symbol)}`;
+}
+
+function krStockHref(symbol: string) {
+  return KR_INDEX_HREF[symbol] ?? `https://finance.naver.com/item/main.naver?code=${symbol}`;
+}
+---
+
+<BaseLayout title="Market Dashboard">
+  <UpdatedAt iso={usMarket.fetchedAt} label="US data" slot="header-right" />
+
+  {/* Assets Section */}
+  <section class="mb-8">
+    <div class="flex items-center justify-between mb-4">
+      <h2 class="text-lg font-bold flex items-center gap-2">
+        주요 자산
+      </h2>
+      <UpdatedAt iso={assets.fetchedAt} label="Assets" />
+    </div>
+    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+      {assets.assets.map((asset) => (
+        <MarketIndex
+          symbol={asset.symbol}
+          name={asset.displayName}
+          price={asset.price}
+          change={asset.change}
+          changePercent={asset.changePercent}
+          previousClose={asset.price - asset.change}
+          dayHigh={asset.dayHigh}
+          dayLow={asset.dayLow}
+          href={yahooHref(asset.symbol)}
+        />
+      ))}
+    </div>
+  </section>
+
+  {/* US Market Section */}
+  <section class="mb-8">
+    <h2 class="text-lg font-bold mb-4 flex items-center gap-2">
+      <span class="text-text-secondary text-sm">US</span> 미국 시장 현황
+    </h2>
+    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 mb-6">
+      {usMarket.indices.map((idx) => (
+        <MarketIndex
+          symbol={idx.symbol}
+          name={idx.name}
+          price={idx.price}
+          change={idx.change}
+          changePercent={idx.changePercent}
+          previousClose={idx.previousClose}
+          dayHigh={idx.dayHigh}
+          dayLow={idx.dayLow}
+          href={yahooHref(idx.symbol)}
+        />
+      ))}
+    </div>
+    <div class="grid grid-cols-1 gap-4 lg:grid-cols-3">
+      <StockTable title="상승 종목 (US)" stocks={usMarket.movers.gainers} type="gainers" currency="USD" />
+      <StockTable title="하락 종목 (US)" stocks={usMarket.movers.losers} type="losers" currency="USD" />
+      <NewsCard articles={usNews.articles} />
+    </div>
+  </section>
+
+  {/* KR Market Section */}
+  <section class="mb-8">
+    <div class="flex items-center justify-between mb-4">
+      <h2 class="text-lg font-bold flex items-center gap-2">
+        <span class="text-text-secondary text-sm">KR</span> 한국 시장 현황
+      </h2>
+      <UpdatedAt iso={krMarket.fetchedAt} label="KR data" />
+    </div>
+    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 mb-6">
+      {krMarket.indices.map((idx) => (
+        <MarketIndex
+          symbol={idx.symbol}
+          name={idx.name}
+          price={idx.price}
+          change={idx.change}
+          changePercent={idx.changePercent}
+          previousClose={idx.previousClose}
+          dayHigh={idx.dayHigh}
+          dayLow={idx.dayLow}
+          volume={idx.volume}
+          tradingValue={idx.tradingValue}
+          href={krStockHref(idx.symbol)}
+        />
+      ))}
+    </div>
+    <div class="grid grid-cols-1 gap-4 lg:grid-cols-3">
+      <StockTable title="상승 종목 (KR)" stocks={krMarket.topGainers} type="gainers" currency="KRW" />
+      <StockTable title="하락 종목 (KR)" stocks={krMarket.topLosers} type="losers" currency="KRW" />
+      <StockTable title="거래량 상위 (KR)" stocks={krMarket.topVolume} type="volume" currency="KRW" />
+    </div>
+  </section>
+</BaseLayout>

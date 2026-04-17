@@ -1,0 +1,55 @@
+{
+  "fetchedAt": "2026-04-17T06:30:00Z",
+  "articles": [
+    {
+      "title": "Fed Holds Interest Rates Steady Amid Inflation Concerns",
+      "titleKo": "연준, 인플레이션 우려 속 금리 동결",
+      "source": "Reuters",
+      "url": "https://www.reuters.com/markets/fed-rates-2026",
+      "publishedAt": "2026-04-17T04:00:00Z",
+      "summary": "The Federal Reserve maintained its benchmark rate at 4.25-4.50%, citing persistent inflation pressures despite cooling labor market.",
+      "summaryKo": "연방준비제도는 노동시장 냉각에도 불구하고 지속적인 인플레이션 압력을 이유로 기준금리를 4.25~4.50%로 유지했다.",
+      "sentiment": "neutral"
+    },
+    {
+      "title": "NVIDIA Surges on Record AI Chip Orders for Q2",
+      "titleKo": "엔비디아, 2분기 AI 칩 주문 신기록에 급등",
+      "source": "Bloomberg",
+      "url": "https://www.bloomberg.com/news/nvidia-ai-orders",
+      "publishedAt": "2026-04-17T03:30:00Z",
+      "summary": "NVIDIA shares jumped 2.5% after reporting AI chip backlog exceeding $40B for the upcoming quarter.",
+      "summaryKo": "엔비디아 주가가 다음 분기 AI 칩 수주 잔고 400억 달러 돌파 소식에 2.5% 급등했다.",
+      "sentiment": "positive"
+    },
+    {
+      "title": "Tesla Drops 5% After Missing Delivery Estimates",
+      "titleKo": "테슬라, 인도량 목표 미달로 5% 하락",
+      "source": "CNBC",
+      "url": "https://www.cnbc.com/tesla-deliveries-miss",
+      "publishedAt": "2026-04-17T02:15:00Z",
+      "summary": "Tesla delivered 410,000 vehicles in Q1, falling short of analyst expectations of 450,000 units.",
+      "summaryKo": "테슬라는 1분기 41만 대를 인도하며 애널리스트 예상치 45만 대에 미치지 못했다.",
+      "sentiment": "negative"
+    },
+    {
+      "title": "S&P 500 Ends Flat as Tech Gains Offset Financial Losses",
+      "titleKo": "S&P 500 보합 마감, 기술주 상승이 금융주 하락 상쇄",
+      "source": "MarketWatch",
+      "url": "https://www.marketwatch.com/sp500-tech-financials",
+      "publishedAt": "2026-04-16T21:00:00Z",
+      "summary": "Major indices traded sideways with technology sector providing support while bank stocks declined.",
+      "summaryKo": "주요 지수가 보합세를 보인 가운데 기술주가 지지력을 제공하고 은행주는 하락했다.",
+      "sentiment": "neutral"
+    },
+    {
+      "title": "Oil Prices Rise on Middle East Supply Concerns",
+      "titleKo": "유가, 중동 공급 우려에 상승",
+      "source": "Reuters",
+      "url": "https://www.reuters.com/markets/oil-mideast",
+      "publishedAt": "2026-04-16T20:30:00Z",
+      "summary": "Brent crude rose 1.2% to $87.50 per barrel amid escalating geopolitical tensions in the region.",
+      "summaryKo": "브렌트유가 중동 지정학적 긴장 고조 속에 배럴당 87.50달러로 1.2% 상승했다.",
+      "sentiment": "neutral"
+    }
+  ]
+}
