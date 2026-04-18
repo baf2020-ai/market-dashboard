@@ -16,13 +16,14 @@ interface Props {
 
 const { articles } = Astro.props;
 
-function timeAgo(iso: string): string {
-  const diff = Date.now() - new Date(iso).getTime();
-  const hours = Math.floor(diff / 3_600_000);
-  if (hours < 1) return "방금 전";
-  if (hours < 24) return `${hours}시간 전`;
-  const days = Math.floor(hours / 24);
-  return `${days}일 전`;
+function formatKST(iso: string): string {
+  const d = new Date(iso);
+  const kst = new Date(d.getTime() + 9 * 60 * 60 * 1000);
+  const m = String(kst.getUTCMonth() + 1).padStart(2, "0");
+  const day = String(kst.getUTCDate()).padStart(2, "0");
+  const h = String(kst.getUTCHours()).padStart(2, "0");
+  const min = String(kst.getUTCMinutes()).padStart(2, "0");
+  return `${m}/${day} ${h}:${min}`;
 }
 
 const sentimentLabel: Record<string, { text: string; class: string }> = {
@@ -61,7 +62,7 @@ const sentimentLabel: Record<string, { text: string; class: string }> = {
                 {article.source}
               </a>
               <span>&middot;</span>
-              <span>{timeAgo(article.publishedAt)}</span>
+              <span>{formatKST(article.publishedAt)}</span>
               <span>&middot;</span>
               <span class={sentiment.class}>{sentiment.text}</span>
             </div>
