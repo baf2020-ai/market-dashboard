@@ -3,3 +3,4 @@ dist/
 .astro/
 .DS_Store
 _workspace/
+package-lock.json
